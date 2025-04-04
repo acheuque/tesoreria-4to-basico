@@ -9,16 +9,50 @@ const formatCurrency = (amount) => {
     }).format(amount);
 };
 
+function createCuotasTable(cuotas) {
+    const table = document.createElement('table');
+    table.className = 'cuotas-table';
+    
+    // Create header
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+        <tr>
+            <th>Mes</th>
+            <th>Cuotas Pagadas</th>
+            <th>Cuotas Pendientes</th>
+        </tr>
+    `;
+    table.appendChild(thead);
+    
+    // Create body
+    const tbody = document.createElement('tbody');
+    cuotas.forEach(cuota => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${cuota.mes}</td>
+            <td class="pagadas">${cuota.cuotasPagadas}</td>
+            <td class="pendientes">${cuota.cuotasPendientes}</td>
+        `;
+        tbody.appendChild(row);
+    });
+    table.appendChild(tbody);
+    
+    return table;
+}
+
 async function loadData() {
     try {
         const response = await fetch(API_URL);
         const data = await response.json();
         
-        if (data && data.length > 0) {
-            const ingresos = data[0].TotalIngresos;
-            const egresos = data[0].TotalEgresos;
+        if (data) {
+            console.log(data);
+            const ingresos = data.totals["Total Ingresos"];
+            console.log(ingresos);
+            const egresos = data.totals["Total Egresos"];
+            console.log(egresos);
             const balance = ingresos - egresos;
-
+            console.log(balance);
             document.getElementById('ingresos').textContent = formatCurrency(ingresos);
             document.getElementById('egresos').textContent = formatCurrency(egresos);
             document.getElementById('balance').textContent = formatCurrency(balance);
@@ -26,6 +60,10 @@ async function loadData() {
             // Add color to balance based on value
             const balanceElement = document.getElementById('balance');
             balanceElement.style.color = balance >= 0 ? '#2e7d32' : '#c62828';
+
+            // Create and add cuotas table
+            const cuotasTable = createCuotasTable(data.cuotas);
+            document.getElementById('cuotas-container').appendChild(cuotasTable);
         }
     } catch (error) {
         console.error('Error loading data:', error);
@@ -35,4 +73,4 @@ async function loadData() {
     }
 }
 
-loadData(); 
+loadData();
