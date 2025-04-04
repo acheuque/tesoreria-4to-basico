@@ -1,32 +1,34 @@
 // Google Apps Script function that serves spreadsheet data as JSON
 function doGet() {
-  // Use getActiveSpreadsheet() only for the specific spreadsheet
   var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = spreadsheet.getSheets()[0];  // Get first sheet
   
-  // Only read operations
-  var dataRange = sheet.getRange(1, 1, sheet.getLastRow(), sheet.getLastColumn());
-  var values = dataRange.getValues();
+  // Get the total ingresos/egresos data
+  var totalsRange = sheet.getRange(1, 1, 2, 2);
+  var totalsValues = totalsRange.getValues();
   
-  // Get headers from first row
-  var headers = values[0];
+  // Get the cuotas data
+  var cuotasRange = sheet.getRange(5, 1, 11, 3);  // From row 5 to 15, columns A to C
+  var cuotasValues = cuotasRange.getValues();
   
-  // Create array to hold objects
-  var jsonData = [];
+  // Create the JSON structure
+  var jsonData = {
+    totals: {
+      [totalsValues[0][0]]: totalsValues[1][0],  // Total Ingresos
+      [totalsValues[0][1]]: totalsValues[1][1]   // Total Egresos
+    },
+    cuotas: []
+  };
   
-  // Loop through rows starting from index 1 to skip headers
-  for(var i = 1; i < values.length; i++) {
-    var row = values[i];
-    var record = {};
-    
-    // Only add rows that have data
-    if (row[0] !== '' || row[1] !== '') {
-      for(var j = 0; j < headers.length; j++) {
-        if (headers[j] !== '') {
-          record[headers[j].replace(/\s+/g, '')] = row[j];
-        }
-      }
-      jsonData.push(record);
+  // Process cuotas data
+  for(var i = 1; i < cuotasValues.length; i++) {
+    var row = cuotasValues[i];
+    if (row[0] !== '') {  // Only process rows with month names
+      jsonData.cuotas.push({
+        mes: row[0],
+        cuotasPagadas: row[1],
+        cuotasPendientes: row[2]
+      });
     }
   }
   
