@@ -63,13 +63,19 @@ async function loadData() {
 
             // Create and add cuotas table
             const cuotasTable = createCuotasTable(data.cuotas);
-            document.getElementById('cuotas-container').appendChild(cuotasTable);
+            const cuotasContainer = document.getElementById('cuotas-container');
+            const loadingElement = document.getElementById('cuotas-loading');
+            
+            // Remove loading state and add table
+            loadingElement.remove();
+            cuotasContainer.appendChild(cuotasTable);
         }
     } catch (error) {
         console.error('Error loading data:', error);
         document.getElementById('ingresos').textContent = 'Error al cargar datos';
         document.getElementById('egresos').textContent = 'Error al cargar datos';
         document.getElementById('balance').textContent = 'Error al cargar datos';
+        document.getElementById('cuotas-loading').textContent = 'Error al cargar datos';
     }
 }
 

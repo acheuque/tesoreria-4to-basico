@@ -32,6 +32,17 @@
             animation: float 6s ease-in-out infinite;
         }
 
+        .cuotas-box {
+            background-color: white;
+            border: 3px solid var(--cambridge-blue);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0, 56, 118, 0.2);
+            margin-top: 30px;
+            animation: float 6s ease-in-out infinite;
+            animation-delay: 0.3s;
+        }
+
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
@@ -232,13 +243,14 @@
             </div>
             <div id="balance" class="amount">Cargando...</div>
         </div>
+    </div>
 
-        <div id="cuotas-container" class="cuotas-section">
-            <div class="label">
-                <span class="emoji">📊</span>
-                Estado de Cuotas
-            </div>
+    <div id="cuotas-container" class="cuotas-box">
+        <div class="label">
+            <span class="emoji">📊</span>
+            Estado de Cuotas
         </div>
+        <div id="cuotas-loading" class="amount">Cargando...</div>
     </div>
 
     <script src="script.js"></script>
