@@ -64,7 +64,7 @@ function createEgresosTable(egresos) {
         row.innerHTML = `
             <td class="fecha">${formattedFecha}</td>
             <td class="monto">${formatCurrency(egreso.monto)}</td>
-            <td>${egreso.glosa}</td>
+            <td class="glosa">${egreso.glosa}</td>
         `;
         tbody.appendChild(row);
     });
