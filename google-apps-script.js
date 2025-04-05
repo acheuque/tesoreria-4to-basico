@@ -1,15 +1,20 @@
 // Google Apps Script function that serves spreadsheet data as JSON
 function doGet() {
   var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = spreadsheet.getSheets()[0];  // Get first sheet
+  var mainSheet = spreadsheet.getSheets()[0];  // Get first sheet
+  var egresosSheet = spreadsheet.getSheetByName('Egresos'); // Get Egresos sheet
   
   // Get the total ingresos/egresos data
-  var totalsRange = sheet.getRange(1, 1, 2, 2);
+  var totalsRange = mainSheet.getRange(1, 1, 2, 2);
   var totalsValues = totalsRange.getValues();
   
   // Get the cuotas data
-  var cuotasRange = sheet.getRange(5, 1, 11, 3);  // From row 5 to 15, columns A to C
+  var cuotasRange = mainSheet.getRange(5, 1, 11, 3);  // From row 5 to 15, columns A to C
   var cuotasValues = cuotasRange.getValues();
+  
+  // Get the egresos data
+  var egresosRange = egresosSheet.getRange("A2:C100"); // Get all rows from A2 to C100
+  var egresosValues = egresosRange.getValues().filter(row => row[0] !== ''); // Filter out empty rows
   
   // Create the JSON structure
   var jsonData = {
@@ -17,7 +22,12 @@ function doGet() {
       [totalsValues[0][0]]: totalsValues[1][0],  // Total Ingresos
       [totalsValues[0][1]]: totalsValues[1][1]   // Total Egresos
     },
-    cuotas: []
+    cuotas: [],
+    egresos: egresosValues.map(row => ({
+      fecha: row[0],
+      monto: row[1],
+      glosa: row[2]
+    }))
   };
   
   // Process cuotas data

@@ -208,6 +208,58 @@
         .cuotas-table tr:hover {
             background-color: #f0f7ff;
         }
+
+        .egresos-box {
+            background-color: white;
+            border: 3px solid var(--cambridge-blue);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0, 56, 118, 0.2);
+            margin-top: 30px;
+            animation: float 6s ease-in-out infinite;
+            animation-delay: 0.6s;
+        }
+
+        .egresos-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 56, 118, 0.1);
+        }
+
+        .egresos-table th,
+        .egresos-table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #e0e0e0;
+        }
+
+        .egresos-table th {
+            background-color: var(--cambridge-blue);
+            color: white;
+            font-weight: bold;
+        }
+
+        .egresos-table tr:nth-child(even) {
+            background-color: #f5f5f5;
+        }
+
+        .egresos-table .monto {
+            text-align: right;
+            font-family: monospace;
+            font-size: 1.1em;
+        }
+
+        .egresos-table tr:hover {
+            background-color: #f0f7ff;
+        }
+
+        .fecha {
+            white-space: nowrap;
+        }
     </style>
 </head>
 <body>
@@ -251,6 +303,14 @@
             Estado de Cuotas
         </div>
         <div id="cuotas-loading" class="amount">Cargando...</div>
+    </div>
+
+    <div id="egresos-container" class="egresos-box">
+        <div class="label">
+            <span class="emoji">📝</span>
+            Detalle de Egresos
+        </div>
+        <div id="egresos-loading" class="amount">Cargando...</div>
     </div>
 
     <script src="script.js"></script>
