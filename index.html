@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>🎯 Tesorería 4to Básico</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
         
@@ -20,6 +21,55 @@
             background-color: var(--light-blue);
             background-image: radial-gradient(rgba(0, 56, 118, 0.1) 2px, transparent 2px);
             background-size: 30px 30px;
+            font-size: 16px;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            .amount {
+                font-size: 24px !important;
+            }
+
+            .label {
+                font-size: 16px !important;
+            }
+
+            .financial-summary, .cuotas-box, .egresos-box {
+                padding: 15px !important;
+            }
+
+            .cuotas-table, .egresos-table {
+                font-size: 14px;
+            }
+
+            .cuotas-table th,
+            .cuotas-table td,
+            .egresos-table th,
+            .egresos-table td {
+                padding: 8px !important;
+            }
+
+            .egresos-table {
+                display: block;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            h1 {
+                font-size: 24px !important;
+            }
+
+            .emoji {
+                font-size: 20px !important;
+            }
+
+            .piggy-bank {
+                font-size: 36px !important;
+            }
         }
 
         .financial-summary {
@@ -251,6 +301,20 @@
             text-align: right;
             font-family: monospace;
             font-size: 1.1em;
+            white-space: nowrap;
+        }
+
+        .egresos-table .glosa {
+            min-width: 200px;
+            max-width: 400px;
+            word-wrap: break-word;
+        }
+
+        @media (max-width: 600px) {
+            .egresos-table .glosa {
+                min-width: 150px;
+                max-width: 200px;
+            }
         }
 
         .egresos-table tr:hover {
