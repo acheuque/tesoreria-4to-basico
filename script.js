@@ -40,6 +40,39 @@ function createCuotasTable(cuotas) {
     return table;
 }
 
+function createEgresosTable(egresos) {
+    const table = document.createElement('table');
+    table.className = 'egresos-table';
+    
+    // Create header
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+        <tr>
+            <th>Fecha</th>
+            <th>Monto</th>
+            <th>Glosa</th>
+        </tr>
+    `;
+    table.appendChild(thead);
+    
+    // Create body
+    const tbody = document.createElement('tbody');
+    egresos.forEach(egreso => {
+        const fecha = new Date(egreso.fecha);
+        const formattedFecha = fecha.toLocaleDateString('es-CL');
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td class="fecha">${formattedFecha}</td>
+            <td class="monto">${formatCurrency(egreso.monto)}</td>
+            <td>${egreso.glosa}</td>
+        `;
+        tbody.appendChild(row);
+    });
+    table.appendChild(tbody);
+    
+    return table;
+}
+
 async function loadData() {
     try {
         const response = await fetch(API_URL);
@@ -64,11 +97,16 @@ async function loadData() {
             // Create and add cuotas table
             const cuotasTable = createCuotasTable(data.cuotas);
             const cuotasContainer = document.getElementById('cuotas-container');
-            const loadingElement = document.getElementById('cuotas-loading');
-            
-            // Remove loading state and add table
-            loadingElement.remove();
+            const cuotasLoadingElement = document.getElementById('cuotas-loading');
+            cuotasLoadingElement.remove();
             cuotasContainer.appendChild(cuotasTable);
+
+            // Create and add egresos table
+            const egresosTable = createEgresosTable(data.egresos);
+            const egresosContainer = document.getElementById('egresos-container');
+            const egresosLoadingElement = document.getElementById('egresos-loading');
+            egresosLoadingElement.remove();
+            egresosContainer.appendChild(egresosTable);
         }
     } catch (error) {
         console.error('Error loading data:', error);
@@ -76,6 +114,7 @@ async function loadData() {
         document.getElementById('egresos').textContent = 'Error al cargar datos';
         document.getElementById('balance').textContent = 'Error al cargar datos';
         document.getElementById('cuotas-loading').textContent = 'Error al cargar datos';
+        document.getElementById('egresos-loading').textContent = 'Error al cargar datos';
     }
 }
 
