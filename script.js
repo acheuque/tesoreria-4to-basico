@@ -41,6 +41,13 @@ function createCuotasTable(cuotas) {
 }
 
 function createEgresosTable(egresos) {
+    // Filter egresos to only include ingresos adicionales
+    const egresosFiltered = egresos.filter(egreso => egreso.monto >= 0);
+    
+    if(!egresosFiltered.length) {
+        return;
+    }
+
     const table = document.createElement('table');
     table.className = 'egresos-table';
     
@@ -57,13 +64,53 @@ function createEgresosTable(egresos) {
     
     // Create body
     const tbody = document.createElement('tbody');
-    egresos.forEach(egreso => {
+    egresosFiltered.forEach(egreso => {
         const fecha = new Date(egreso.fecha);
         const formattedFecha = fecha.toLocaleDateString('es-CL');
         const row = document.createElement('tr');
         row.innerHTML = `
             <td class="fecha">${formattedFecha}</td>
             <td class="monto">${formatCurrency(egreso.monto)}</td>
+            <td class="glosa">${egreso.glosa}</td>
+        `;
+        tbody.appendChild(row);
+    });
+    table.appendChild(tbody);
+    
+    return table;
+}
+
+function createIngresosAdicionalesTable(egresos) {
+    // Filter egresos to only include ingresos adicionales
+    const egresosFiltered = egresos.filter(egreso => egreso.monto < 0);
+    
+    if(!egresosFiltered.length) {
+        return;
+    }
+
+    const table = document.createElement('table');
+    table.className = 'ingresos-adicionales-table';
+        
+    // Create header
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+        <tr>
+            <th>Fecha</th>
+            <th>Monto</th>
+            <th>Glosa</th>
+        </tr>
+    `;
+    table.appendChild(thead);
+    
+    // Create body
+    const tbody = document.createElement('tbody');
+    egresosFiltered.forEach(egreso => {
+        const fecha = new Date(egreso.fecha);
+        const formattedFecha = fecha.toLocaleDateString('es-CL');
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td class="fecha">${formattedFecha}</td>
+            <td class="monto">${formatCurrency(egreso.monto * -1)}</td>
             <td class="glosa">${egreso.glosa}</td>
         `;
         tbody.appendChild(row);
@@ -102,11 +149,16 @@ async function loadData() {
             cuotasContainer.appendChild(cuotasTable);
 
             // Create and add egresos table
-            const egresosTable = createEgresosTable(data.egresos);
+            const egresosTable = createEgresosTable(data.egresos); 
+            const ingresosAdicionalesTable = createIngresosAdicionalesTable(data.egresos);
             const egresosContainer = document.getElementById('egresos-container');
             const egresosLoadingElement = document.getElementById('egresos-loading');
+            const ingresosAdicionalesContainer = document.getElementById('ingresos-adicionales-container');
+            const ingresosAdicionalesLoadingElement = document.getElementById('ingresos-adicionales-loading');
             egresosLoadingElement.remove();
             egresosContainer.appendChild(egresosTable);
+            ingresosAdicionalesLoadingElement.remove();
+            ingresosAdicionalesContainer.appendChild(ingresosAdicionalesTable);
         }
     } catch (error) {
         console.error('Error loading data:', error);
@@ -115,6 +167,7 @@ async function loadData() {
         document.getElementById('balance').textContent = 'Error al cargar datos';
         document.getElementById('cuotas-loading').textContent = 'Error al cargar datos';
         document.getElementById('egresos-loading').textContent = 'Error al cargar datos';
+        document.getElementById('ingresos-adicionales-loading').textContent = 'Error al cargar datos';
     }
 }
 
