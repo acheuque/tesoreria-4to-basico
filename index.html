@@ -38,22 +38,23 @@
                 font-size: 16px !important;
             }
 
-            .financial-summary, .cuotas-box, .egresos-box {
+            .financial-summary, .cuotas-box, .egresos-box, .ingresos-adicionales-box {
                 padding: 15px !important;
             }
-
-            .cuotas-table, .egresos-table {
+            .cuotas-table, .egresos-table, .ingresos-adicionales-table {
                 font-size: 14px;
             }
 
             .cuotas-table th,
             .cuotas-table td,
             .egresos-table th,
-            .egresos-table td {
+            .egresos-table td,
+            .ingresos-adicionales-table th,
+            .ingresos-adicionales-table td {
                 padding: 8px !important;
             }
 
-            .egresos-table {
+            .egresos-table, .ingresos-adicionales-table {
                 display: block;
                 overflow-x: auto;
                 -webkit-overflow-scrolling: touch;
@@ -218,7 +219,7 @@
             border-top: 3px dashed var(--cambridge-blue);
         }
 
-        .cuotas-table {
+        .cuotas-table, .egresos-table, .ingresos-adicionales-table {
             width: 100%;
             margin-top: 20px;
             border-collapse: collapse;
@@ -226,16 +227,42 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 4px 8px rgba(0, 56, 118, 0.1);
+            table-layout: fixed;
         }
 
         .cuotas-table th,
-        .cuotas-table td {
+        .cuotas-table td,
+        .egresos-table th,
+        .egresos-table td {
             padding: 12px;
             text-align: center;
             border: 1px solid #e0e0e0;
         }
 
-        .cuotas-table th {
+        .egresos-table th,
+        .egresos-table td {
+            text-align: left;
+        }
+
+        .cuotas-table th:first-child,
+        .egresos-table th:first-child,
+        .cuotas-table td:first-child,
+        .egresos-table td:first-child {
+            width: 120px;
+        }
+
+        .egresos-table th:nth-child(2),
+        .egresos-table td:nth-child(2) {
+            width: 120px;
+        }
+
+        .egresos-table th:last-child,
+        .egresos-table td:last-child {
+            width: auto;
+        }
+
+        .cuotas-table th,
+        .egresos-table th {
             background-color: var(--cambridge-blue);
             color: white;
             font-weight: bold;
@@ -255,11 +282,31 @@
             font-weight: bold;
         }
 
-        .cuotas-table tr:hover {
+        .cuotas-table tr:hover,
+        .egresos-table tr:hover {
             background-color: #f0f7ff;
         }
 
-        .egresos-box {
+        .fecha {
+            white-space: nowrap;
+        }
+
+        .egresos-table .monto,
+        .ingresos-adicionales-table .monto {
+            text-align: right;
+            font-family: monospace;
+            font-size: 1.1em;
+            white-space: nowrap;
+        }
+
+        .egresos-table .glosa,
+        .ingresos-adicionales-table .glosa {
+            width: 100%;
+            word-wrap: break-word;
+        }
+
+        .egresos-box,
+        .ingresos-adicionales-box {
             background-color: white;
             border: 3px solid var(--cambridge-blue);
             padding: 30px;
@@ -267,62 +314,106 @@
             box-shadow: 0 8px 16px rgba(0, 56, 118, 0.2);
             margin-top: 30px;
             animation: float 6s ease-in-out infinite;
-            animation-delay: 0.6s;
+            animation-delay: 0.9s;
         }
 
-        .egresos-table {
-            width: 100%;
-            margin-top: 20px;
-            border-collapse: collapse;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 56, 118, 0.1);
-        }
-
-        .egresos-table th,
-        .egresos-table td {
+        .ingresos-adicionales-table th,
+        .ingresos-adicionales-table td {
             padding: 12px;
             text-align: left;
             border: 1px solid #e0e0e0;
         }
 
-        .egresos-table th {
+        .ingresos-adicionales-table th {
             background-color: var(--cambridge-blue);
             color: white;
             font-weight: bold;
         }
 
-        .egresos-table tr:nth-child(even) {
-            background-color: #f5f5f5;
+        .ingresos-adicionales-table th:first-child,
+        .ingresos-adicionales-table td:first-child {
+            width: 120px;
         }
 
-        .egresos-table .monto {
-            text-align: right;
-            font-family: monospace;
-            font-size: 1.1em;
-            white-space: nowrap;
+        .ingresos-adicionales-table th:nth-child(2),
+        .ingresos-adicionales-table td:nth-child(2) {
+            width: 120px;
         }
 
-        .egresos-table .glosa {
-            min-width: 200px;
-            max-width: 400px;
-            word-wrap: break-word;
+        .ingresos-adicionales-table th:last-child,
+        .ingresos-adicionales-table td:last-child {
+            width: auto;
         }
 
-        @media (max-width: 600px) {
-            .egresos-table .glosa {
-                min-width: 150px;
-                max-width: 200px;
-            }
-        }
-
-        .egresos-table tr:hover {
+        .ingresos-adicionales-table tr:hover {
             background-color: #f0f7ff;
         }
 
-        .fecha {
-            white-space: nowrap;
+        @media (max-width: 600px) {
+            .cuotas-table, 
+            .egresos-table,
+            .ingresos-adicionales-table {
+                font-size: 14px;
+                display: table;
+                width: 100%;
+                min-width: 100%;
+                table-layout: fixed;
+                border-radius: 8px;
+            }
+
+            .cuotas-box,
+            .egresos-box,
+            .ingresos-adicionales-box {
+                padding: 15px !important;
+                overflow: hidden;
+            }
+
+            .cuotas-table th,
+            .cuotas-table td,
+            .egresos-table th,
+            .egresos-table td,
+            .ingresos-adicionales-table th,
+            .ingresos-adicionales-table td {
+                padding: 8px !important;
+            }
+
+            .egresos-table th:first-child,
+            .egresos-table td:first-child,
+            .ingresos-adicionales-table th:first-child,
+            .ingresos-adicionales-table td:first-child {
+                width: 90px;
+            }
+
+            .egresos-table th:nth-child(2),
+            .egresos-table td:nth-child(2),
+            .ingresos-adicionales-table th:nth-child(2),
+            .ingresos-adicionales-table td:nth-child(2) {
+                width: 90px;
+            }
+
+            .egresos-table .glosa,
+            .ingresos-adicionales-table .glosa {
+                min-width: 120px;
+                max-width: 200px;
+            }
+
+            .egresos-table .glosa,
+            .ingresos-adicionales-table .glosa {
+                min-width: 150px;
+                max-width: 200px;
+            }
+
+            h1 {
+                font-size: 24px !important;
+            }
+
+            .emoji {
+                font-size: 20px !important;
+            }
+
+            .piggy-bank {
+                font-size: 36px !important;
+            }
         }
     </style>
 </head>
@@ -375,6 +466,14 @@
             Detalle de Egresos
         </div>
         <div id="egresos-loading" class="amount">Cargando...</div>
+    </div>
+
+    <div id="ingresos-adicionales-container" class="ingresos-adicionales-box">
+        <div class="label">
+            <span class="emoji">📊</span>
+            Detalle de Ingresos Adicionales
+        </div>
+        <div id="ingresos-adicionales-loading" class="amount">Cargando...</div>
     </div>
 
     <script src="script.js"></script>
