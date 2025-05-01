@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>🎯 Tesorería 4to Básico</title>
+    <title>🌊 Tesorería 4to Básico</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
         
         :root {
-            --cambridge-blue: #003876;
-            --cambridge-red: #E31E24;
-            --cambridge-yellow: #FDB913;
-            --light-blue: #E8F1F8;
+            --deep-sea: #003C5F;
+            --ocean-blue: #0077BE;
+            --wave-blue: #48CAE4;
+            --seafoam: #90E0EF;
+            --sand: #F5DEB3;
         }
         
         body {
@@ -18,10 +19,23 @@
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-            background-color: var(--light-blue);
-            background-image: radial-gradient(rgba(0, 56, 118, 0.1) 2px, transparent 2px);
-            background-size: 30px 30px;
+            background: linear-gradient(
+                135deg,
+                var(--deep-sea) 0%,
+                var(--ocean-blue) 40%,
+                var(--wave-blue) 100%
+            );
+            background-image: 
+                linear-gradient(
+                    135deg,
+                    var(--deep-sea) 0%,
+                    var(--ocean-blue) 40%,
+                    var(--wave-blue) 100%
+                ),
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 2px, transparent 2px);
+            background-size: 100% 100%, 30px 30px;
             font-size: 16px;
+            color: white;
         }
 
         @media (max-width: 600px) {
@@ -74,24 +88,25 @@
         }
 
         .financial-summary {
-            background-color: white;
-            border: 3px solid var(--cambridge-blue);
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 3px solid var(--seafoam);
             padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 8px 16px rgba(0, 56, 118, 0.2);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             margin-top: 20px;
             animation: float 6s ease-in-out infinite;
         }
 
-        .cuotas-box {
-            background-color: white;
-            border: 3px solid var(--cambridge-blue);
+        .cuotas-box, .egresos-box, .ingresos-adicionales-box {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 3px solid var(--seafoam);
             padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 8px 16px rgba(0, 56, 118, 0.2);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             margin-top: 30px;
             animation: float 6s ease-in-out infinite;
-            animation-delay: 0.3s;
         }
 
         @keyframes float {
@@ -113,25 +128,25 @@
         }
 
         .ingresos {
-            background-color: rgba(253, 185, 19, 0.15);
-            border: 2px solid var(--cambridge-yellow);
+            background-color: rgba(144, 224, 239, 0.15);
+            border: 2px solid var(--seafoam);
         }
 
         .egresos {
-            background-color: rgba(227, 30, 36, 0.15);
-            border: 2px solid var(--cambridge-red);
+            background-color: rgba(0, 119, 190, 0.15);
+            border: 2px solid var(--ocean-blue);
         }
 
         .amount {
             font-size: 32px;
             font-weight: bold;
             margin-top: 10px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-            color: var(--cambridge-blue);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            color: white;
         }
 
         .label {
-            color: var(--cambridge-blue);
+            color: white;
             font-size: 20px;
             margin-bottom: 5px;
             display: flex;
@@ -143,23 +158,15 @@
         .balance {
             margin-top: 30px;
             padding-top: 20px;
-            border-top: 3px dashed var(--cambridge-blue);
-            animation: rainbow 10s linear infinite;
-        }
-
-        @keyframes rainbow {
-            0% { border-color: var(--cambridge-blue); }
-            33% { border-color: var(--cambridge-red); }
-            66% { border-color: var(--cambridge-yellow); }
-            100% { border-color: var(--cambridge-blue); }
+            border-top: 3px dashed var(--seafoam);
         }
 
         h1 {
-            color: var(--cambridge-blue);
+            color: white;
             text-align: center;
             font-size: 36px;
             margin-bottom: 30px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
 
         .emoji {
@@ -216,7 +223,7 @@
         .cuotas-section {
             margin-top: 30px;
             padding-top: 20px;
-            border-top: 3px dashed var(--cambridge-blue);
+            border-top: 3px dashed var(--seafoam);
         }
 
         .cuotas-table, .egresos-table, .ingresos-adicionales-table {
@@ -263,9 +270,14 @@
 
         .cuotas-table th,
         .egresos-table th {
-            background-color: var(--cambridge-blue);
+            background-color: var(--deep-sea);
             color: white;
             font-weight: bold;
+        }
+
+        .cuotas-table,
+        .egresos-table td {
+            color: #003C5F;
         }
 
         .cuotas-table tr:nth-child(even) {
@@ -278,7 +290,7 @@
         }
 
         .cuotas-table .pendientes {
-            color: var(--cambridge-red);
+            color: var(--ocean-blue);
             font-weight: bold;
         }
 
@@ -305,18 +317,6 @@
             word-wrap: break-word;
         }
 
-        .egresos-box,
-        .ingresos-adicionales-box {
-            background-color: white;
-            border: 3px solid var(--cambridge-blue);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 8px 16px rgba(0, 56, 118, 0.2);
-            margin-top: 30px;
-            animation: float 6s ease-in-out infinite;
-            animation-delay: 0.9s;
-        }
-
         .ingresos-adicionales-table th,
         .ingresos-adicionales-table td {
             padding: 12px;
@@ -324,8 +324,12 @@
             border: 1px solid #e0e0e0;
         }
 
+        .ingresos-adicionales-table td {
+            color: #003C5F;
+        }
+
         .ingresos-adicionales-table th {
-            background-color: var(--cambridge-blue);
+            background-color: var(--deep-sea);
             color: white;
             font-weight: bold;
         }
@@ -420,16 +424,16 @@
 <body>
     <div class="money-container"></div>
     
-    <h1>🎯 Tesorería 4to Básico 🎯</h1>
+    <h1>🌊 Tesorería 4to Básico 🚢</h1>
     
     <div class="piggy-bank">
-        🐷
+        🐳
     </div>
 
     <div class="financial-summary">
         <div class="amount-container ingresos">
             <div class="label">
-                <span class="emoji">💰</span>
+                <span class="emoji">🐠</span>
                 Total Ingresos
             </div>
             <div id="ingresos" class="amount">Cargando...</div>
@@ -437,7 +441,7 @@
         
         <div class="amount-container egresos">
             <div class="label">
-                <span class="emoji">🛍️</span>
+                <span class="emoji">🌊</span>
                 Total Egresos
             </div>
             <div id="egresos" class="amount">Cargando...</div>
@@ -445,7 +449,7 @@
 
         <div class="balance">
             <div class="label">
-                <span class="emoji">🎯</span>
+                <span class="emoji">⚓</span>
                 Balance Final
             </div>
             <div id="balance" class="amount">Cargando...</div>
@@ -454,7 +458,7 @@
 
     <div id="cuotas-container" class="cuotas-box">
         <div class="label">
-            <span class="emoji">📊</span>
+            <span class="emoji">🐋</span>
             Estado de Cuotas
         </div>
         <div id="cuotas-loading" class="amount">Cargando...</div>
@@ -462,7 +466,7 @@
 
     <div id="egresos-container" class="egresos-box">
         <div class="label">
-            <span class="emoji">📝</span>
+            <span class="emoji">🐟</span>
             Detalle de Egresos
         </div>
         <div id="egresos-loading" class="amount">Cargando...</div>
@@ -470,7 +474,7 @@
 
     <div id="ingresos-adicionales-container" class="ingresos-adicionales-box">
         <div class="label">
-            <span class="emoji">📊</span>
+            <span class="emoji">🐡</span>
             Detalle de Ingresos Adicionales
         </div>
         <div id="ingresos-adicionales-loading" class="amount">Cargando...</div>
@@ -484,12 +488,11 @@
             
             // Randomly choose between bill and coin
             const isCoin = Math.random() < 0.4; // 40% chance of being a coin
-            money.textContent = isCoin ? '🪙' : '💵';
+            const seaElements = ['🐟', '🐠', '🐡', '🦈', '🐋', '🐳', '🦀', '🦑', '🐙', '🪼'];
+            const randomSeaElement = seaElements[Math.floor(Math.random() * seaElements.length)];
+
+            money.textContent = randomSeaElement
             
-            if (isCoin) {
-                money.classList.add('coin');
-                money.style.fontSize = '38px';
-            }
             
             // Random horizontal position
             const startPosition = Math.random() * (window.innerWidth - 100);

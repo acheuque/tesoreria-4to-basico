@@ -139,7 +139,7 @@ async function loadData() {
 
             // Add color to balance based on value
             const balanceElement = document.getElementById('balance');
-            balanceElement.style.color = balance >= 0 ? '#2e7d32' : '#c62828';
+            balanceElement.style.color = balance >= 0 ? '#154517' : '#c62828';
 
             // Create and add cuotas table
             const cuotasTable = createCuotasTable(data.cuotas);
