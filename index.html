@@ -7,10 +7,12 @@
         @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
         
         :root {
-            --cambridge-blue: #003876;
-            --cambridge-red: #E31E24;
-            --cambridge-yellow: #FDB913;
-            --light-blue: #E8F1F8;
+            --spring-green: #A8E6CF;
+            --spring-pink: #FFB6B9;
+            --spring-yellow: #FFD3B6;
+            --spring-blue: #DCEBF6;
+            --spring-purple: #fa2166;
+            --spring-floral: url('https://www.transparenttextures.com/patterns/flowers.png');
         }
         
         body {
@@ -18,9 +20,9 @@
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-            background-color: var(--light-blue);
-            background-image: radial-gradient(rgba(0, 56, 118, 0.1) 2px, transparent 2px);
-            background-size: 30px 30px;
+            background-color: var(--spring-blue);
+            background-image: var(--spring-floral), linear-gradient(135deg, var(--spring-green) 0%, var(--spring-yellow) 100%);
+            background-size: 200px 200px, cover;
             font-size: 16px;
         }
 
@@ -74,8 +76,8 @@
         }
 
         .financial-summary {
-            background-color: white;
-            border: 3px solid var(--cambridge-blue);
+            background-color: var(--spring-green);
+            border: 3px solid var(--spring-pink);
             padding: 30px;
             border-radius: 20px;
             box-shadow: 0 8px 16px rgba(0, 56, 118, 0.2);
@@ -84,8 +86,8 @@
         }
 
         .cuotas-box {
-            background-color: white;
-            border: 3px solid var(--cambridge-blue);
+            background-color: var(--spring-yellow);
+            border: 3px solid var(--spring-green);
             padding: 30px;
             border-radius: 20px;
             box-shadow: 0 8px 16px rgba(0, 56, 118, 0.2);
@@ -155,7 +157,7 @@
         }
 
         h1 {
-            color: var(--cambridge-blue);
+            color: var(--spring-purple);
             text-align: center;
             font-size: 36px;
             margin-bottom: 30px;
@@ -307,8 +309,8 @@
 
         .egresos-box,
         .ingresos-adicionales-box {
-            background-color: white;
-            border: 3px solid var(--cambridge-blue);
+            background-color: var(--spring-pink);
+            border: 3px solid var(--spring-purple);
             padding: 30px;
             border-radius: 20px;
             box-shadow: 0 8px 16px rgba(0, 56, 118, 0.2);
@@ -418,18 +420,16 @@
     </style>
 </head>
 <body>
-    <div class="money-container"></div>
-    
-    <h1>🎯 Tesorería 4to Básico 🎯</h1>
-    
-    <div class="piggy-bank">
-        🐷
-    </div>
+        <div class="money-container"></div>
+        <h1>🌸 Tesorería 4to Básico 🌸</h1>
+        <div class="piggy-bank">
+            🌷🌼
+        </div>
 
     <div class="financial-summary">
         <div class="amount-container ingresos">
             <div class="label">
-                <span class="emoji">💰</span>
+                <span class="emoji">🌷</span>
                 Total Ingresos
             </div>
             <div id="ingresos" class="amount">Cargando...</div>
@@ -437,7 +437,7 @@
         
         <div class="amount-container egresos">
             <div class="label">
-                <span class="emoji">🛍️</span>
+                <span class="emoji">🌼</span>
                 Total Egresos
             </div>
             <div id="egresos" class="amount">Cargando...</div>
@@ -445,7 +445,7 @@
 
         <div class="balance">
             <div class="label">
-                <span class="emoji">🎯</span>
+                <span class="emoji">🦋</span>
                 Balance Final
             </div>
             <div id="balance" class="amount">Cargando...</div>
@@ -454,7 +454,7 @@
 
     <div id="cuotas-container" class="cuotas-box">
         <div class="label">
-            <span class="emoji">📊</span>
+            <span class="emoji">💐</span>
             Estado de Cuotas
         </div>
         <div id="cuotas-loading" class="amount">Cargando...</div>
@@ -462,7 +462,7 @@
 
     <div id="egresos-container" class="egresos-box">
         <div class="label">
-            <span class="emoji">📝</span>
+            <span class="emoji">🌸</span>
             Detalle de Egresos
         </div>
         <div id="egresos-loading" class="amount">Cargando...</div>
@@ -470,7 +470,7 @@
 
     <div id="ingresos-adicionales-container" class="ingresos-adicionales-box">
         <div class="label">
-            <span class="emoji">📊</span>
+            <span class="emoji">🌻</span>
             Detalle de Ingresos Adicionales
         </div>
         <div id="ingresos-adicionales-loading" class="amount">Cargando...</div>
@@ -482,14 +482,10 @@
             const money = document.createElement('div');
             money.className = 'money';
             
-            // Randomly choose between bill and coin
-            const isCoin = Math.random() < 0.4; // 40% chance of being a coin
-            money.textContent = isCoin ? '🪙' : '💵';
-            
-            if (isCoin) {
-                money.classList.add('coin');
-                money.style.fontSize = '38px';
-            }
+            // Primavera: flores y mariposas
+            const springIcons = ['🌸', '🌷', '🌼', '🦋', '💐'];
+            money.textContent = springIcons[Math.floor(Math.random() * springIcons.length)];
+            money.style.fontSize = '42px';
             
             // Random horizontal position
             const startPosition = Math.random() * (window.innerWidth - 100);
